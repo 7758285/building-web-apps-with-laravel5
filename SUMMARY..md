@@ -2,5 +2,5 @@
 
 * [前言](foreword.md)
 * 知识储备
-* PHP基础知识
+* [PHP基础知识](php.md)
 
