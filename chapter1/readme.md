@@ -30,8 +30,11 @@ Laravel 5 是一个利用  [composer](http://getcomposer.org/) 在众多开源�
 
  1. [命名空间](http://php.net/manual/zh/language.namespaces.php)；
  2. 上面提到过的“[类和对象](http://php.net/manual/zh/book.classobj.php)” 下的全部；
+
  
 更多可以参考我在知乎的回答：[想要开发自己的PHP框架需要那些知识储备？](http://www.zhihu.com/question/26635323/answer/33812516)
+
+或者这里也有很全的很适合新手的文档：[PHP之道](http://wulijun.github.io/php-the-right-way/)
 
 ## 设计模式
   
