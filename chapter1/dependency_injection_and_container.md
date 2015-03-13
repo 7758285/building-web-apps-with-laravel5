@@ -6,3 +6,23 @@
 
 可能写过单元测试的朋友会比较好理解依赖注入写法的一个好处：便于测试。
 
+先看一个用户注册的例子：
+
+```php
+<?php
+
+class UserService {
+    
+    public function create($data) {
+        $user = User::create($data);
+        
+        $mailer = new Mailer(Config::get('mail'));
+        $mailer->send('emails.welcome', '欢迎注册！', compact('user'));
+        
+        return $user;
+    }
+}
+
+```
+上面我们定义了一个用户服务类 `UserService`，它有一个注册用户的功能。可以看到 `create` 方法里先是用模型创建了一个用户，然后给这个用户发送一个欢迎邮件。
+
