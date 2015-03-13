@@ -37,6 +37,17 @@ Laravel 5 是一个利用  [composer](http://getcomposer.org/) 在众多开源�
   
   框架里很多写法都用到了设计模式，所以如果你对设计模式有一定了解的话，你看源码也会很 easy，那么你应该对单例、工厂、策略与命令链模式等有一些了解，可以参考：[《五种常见的 PHP 设计模式》](http://www.ibm.com/developerworks/cn/opensource/os-php-designptrns/) 或者 [《设计模式》](http://www.amazon.com/gp/product/0201633612)一书（国内有中文版)。
 
+## 控制反转
+
+  Laravel 整个框架大量依赖 IoC 容器运行，所以你有必要掌握 [控制反转（Inversion of Control，缩写为IoC）](http://zh.wikipedia.org/wiki/%E6%8E%A7%E5%88%B6%E5%8F%8D%E8%BD%AC) 相关的知识。
+  
+  有以下链接供参考：
+  
+- http://www.4wei.cn/archives/1002316
+- https://github.com/5-say/laravel-4.1-note/blob/master/04.%E7%9F%A5%E8%AF%86%E6%8B%93%E5%B1%95/PHP/PHP-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md
+- http://blog.csdn.net/wzllai/article/details/24485245
+  
+
 ## 模板引擎
 
   你至少应该用过模板引擎，当然，最好是知道模板引擎的实现原理。
