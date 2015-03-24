@@ -57,5 +57,5 @@ Laravel 5 是一个利用  [composer](http://getcomposer.org/) 在众多开源�
 
 ## 开发工具的使用
 
- 作为了个PHP程序员，PHP 包管理工具 [composer](http://getcomposer.org/) 是必要会的、当然还有一些前端工具如 [Gulp](http://gulpjs.com/) 等，毕竟，大部分人还处于“全栈开发”阶段；
+ 作为了个PHP程序员，PHP 包管理工具 [composer](http://getcomposer.org/) 是必要会的、当然还有一些前端工具如[Gulp](http://gulpjs.com/)、[Bower](http://bower.io/) 等，毕竟，大部分人还处于“全栈开发”阶段；
  
