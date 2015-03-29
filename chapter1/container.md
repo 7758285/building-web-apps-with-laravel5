@@ -30,5 +30,7 @@ $mailer->to('i@overtrue')->withSubject('您好安正超！')->send();
 对，确实是这样，不过容器也提供了更多的绑定写法：
 
 ```php
-App::bind('mailer', );
+App::bind('mailer', function(){
+    return new Mailer();
+});
 ```
