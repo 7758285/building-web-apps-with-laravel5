@@ -16,4 +16,19 @@ App::bind('mailer', $mailer);
 ```
 这里的 `App` 就是框架基类 `Application` 的别名（其实是外观，后面再讲），因为上面我们说到了 `Application` 继承了 `Container`，所以 `App` 即为容器。
 
-上面的代码我们以 `mailer` 为别名放进了一个用于发送邮件的“工具” `Mailer` 对象实例。
+上面的代码我们以 `mailer` 为别名放进了一个用于发送邮件的“工具” `Mailer` 对象实例。这里的别名 `mailer` 你可以随意，无关系，不过一个可读性高的名称当然更受欢迎了。
+
+我们在使用的时候可以很方便的从容器取出来：
+
+```php
+$mailer = App::make('mailer');
+$mailer->to('i@overtrue')->withSubject('您好安正超！')->send();
+```
+
+你可能会说：“那这样岂不是每个请求，不管需要不需要发送邮件都实体，都实例化了 `Mailer` 对象，感觉很浪费。”。
+
+对，确实是这样，不过容器也提供了更多的绑定写法：
+
+```php
+App::bind('mailer', );
+```
