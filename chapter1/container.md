@@ -16,4 +16,4 @@ App::bind('mailer', $mailer);
 ```
 这里的 `App` 就是框架基类 `Application` 的别名（其实是外观，后面再讲），因为上面我们说到了 `Application` 继承了 `Container`，所以 `App` 即为容器。
 
-上面的代码我们放进了
+上面的代码我们以 `mailer` 为别名放进了一个用于发送邮件的“工具” `Mailer` 对象实例。
