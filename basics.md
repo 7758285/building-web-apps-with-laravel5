@@ -18,7 +18,7 @@ Laravel 5 是一个利用  [composer](http://getcomposer.org/) 在众多开源�
  8. [session拓展](http://php.net/manual/zh/refs.basic.session.php);
  9. [Cookie的使用](http://php.net/manual/zh/features.cookies.php);
  10. [反射](http://php.net/manual/zh/book.reflection.php);
- 11. [类和对象](http://php.net/manual/zh/book.classobj.php);
+ 11. [类和对象](http://php.net/manual/zh/language.oop5.php);
  12. [图像处理和 GD](http://php.net/manual/zh/book.image.php);
  13. 邮件相关的SMTP;
  14. [文件系统](http://php.net/manual/en/book.filesystem.php);
