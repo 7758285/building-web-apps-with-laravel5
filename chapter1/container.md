@@ -11,4 +11,9 @@ Laravel 拥有一个很强大的 IoC（Inversion of Control，控制反转） �
 用代码来表示：
 
 ```php
+$mailer = new Mailer;
+App::bind('mailer', $mailer);
 ```
+这里的 `App` 就是框架基类 `Application` 的别名（其实是外观，后面再讲），因为上面我们说到了 `Application` 继承了 `Container`，所以 `App` 即为容器。
+
+上面的代码我们放进了
