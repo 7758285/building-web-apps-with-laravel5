@@ -46,9 +46,9 @@ Laravel 5 是一个利用  [composer](http://getcomposer.org/) 在众多开源�
   
   有以下链接供参考：
   
-- http://www.4wei.cn/archives/1002316
-- https://github.com/5-say/laravel-4.1-note/blob/master/04.%E7%9F%A5%E8%AF%86%E6%8B%93%E5%B1%95/PHP/PHP-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md
-- http://blog.csdn.net/wzllai/article/details/24485245
+- [php中的数种依赖注入](http://www.4wei.cn/archives/1002316)
+- [PHP-依赖注入](https://github.com/5-say/laravel-4.1-note/blob/master/04.%E7%9F%A5%E8%AF%86%E6%8B%93%E5%B1%95/PHP/PHP-%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5.md)
+- [awesome PHP之依赖注入容器pimple](http://blog.csdn.net/wzllai/article/details/24485245)
   
 
 ## 模板引擎
