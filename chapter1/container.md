@@ -50,3 +50,12 @@ App::singleton('mailer', function(){
 - `bind` 直接找到别名对应的内容返回
 - `singleton` 在 `bind` 基础上多了一步检查工作：如果已经实例化过，则直接返回实例化的对象，不再重新实例化。
 
+
+这里的 `App::xxx($abstract, $concrete)` 第二个参数 `$concrete` 在取出实例时会被框架传入容器本身以便于你可以从在函数里访问容器对象：
+
+```php
+App::bind('foo', function($app){
+    // $app 为框架容器，你可以在这里访问容器
+    return new Foo();
+});
+```
