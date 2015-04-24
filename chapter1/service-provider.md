@@ -4,11 +4,17 @@ Laravel 由很多子模块组成：认证、会话、数据库、表单验证、
 
 那么他们就必须按一定的规范来完成注册，每个服务提供器必须有一个 `register()` 方法与 一个可选的 `boot()` 方法以及一个表示是否延迟加载的属性 `protected $defer`。`register()` 用于完成一些注册逻辑，比如向 IoC 容器注入一个服务，注册配置文件等。
 
+- `register()` 方法
+- `boot()` 方法
+- `$defer` 属性
+
 我们来看一个框架内部自己的 Cookie 服务提供器：
 
 ```php
 <?php namespace Illuminate\Cookie;
+
 use Illuminate\Support\ServiceProvider;
+
 class CookieServiceProvider extends ServiceProvider {
 	/**
 	 * Register the service provider.
@@ -39,4 +45,6 @@ $cookie->make('logged_user_id', $userId, 60);// 创建一个60分钟有效期的
 
 就能获取到 `Illuminate\Cookie\CookieJar` 的实例。
 
-关于容器的使用请参阅：
+关于容器的使用请参阅：[框架核心 - Ioc容器](chapter1/container.md)
+
+//TODO:未完
