@@ -52,6 +52,48 @@ Facade模式的缺点:
 1. 不能很好地限制客户使用子系统类，如果对客户访问子系统类做太多的限制则减少了可变性和灵活性。
 2. 在不引入抽象外观类的情况下，增加新的子系统可能需要修改外观类或客户端的源代码，违背了“开闭原则”。
 
+## 自定义 Laravel 外观
+
+我们也可以很方便的自定义外观，外观在 Laravel 里支持两种模式：
+1. 直接面向一个可实例化类的外观
+2. 面向容器内对象的外观，使用注入容器时的别名即可。
+
+它们表现在 [Illuminate/Support/Facades/Facade::getFacadeAccessor](https://github.com/laravel/framework/blob/5.0/src/Illuminate/Support/Facades/Facade.php#L128) 
+方法的返回值，你可以返回一个对象或者类名，也可以返回一个容器内对象的别名。
+
+比如我们自己写了一堆关于微信支付的功能，全放在 `app/Libraries/Wechat/` 下了，提供了一个入口文件：`app/Libraries/Wechat/Payment.php`。
+
+我们使用第一种方式添加外观：
+
+#### 第一步：继承外观抽象类 `Illuminate/Support/Facades/Facade`
+
+`app/Libraries/Wechat/PaymentFacade.php`:
+
+```php
+<?php
+namespace Wechat;
+
+use Illuminate/Support/Facades/Facade;
+
+class PaymentFacade extends Facade
+{
+    protected static function getFacadeAccessor(){
+        return 'Wechat/Payment';// 或者 return new Payment(...),不建议
+    }
+}
+```
+
+#### 第二步：添加别名
+
+将下面一行添加到你的 `config/app.php` 中 `alias` 部分：
+
+```php
+`WechatPayment` => 'Wechat/PaymentFacade',
+```
+
+然后就可以在控制器或者其它地方使用 `PaymentFacade::xxx` 了，`xxx` 为你 `Wechat/Payment` 中的方法。
+
+当然，如果你的 `Wechat/Payment` 可能需要一些参数才能实例化，那么这种情况通常是做成 **服务提供器** 的方式来实现。我们会在下一节讲到。
 
 部分内容摘自：[ 设计模式（九）外观模式Facade（结构型）- 真实的归宿 @ CSDN博客](http://blog.csdn.net/hguisu/article/details/7533759)
 
