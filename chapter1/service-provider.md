@@ -49,4 +49,77 @@ $cookie->make('logged_user_id', $userId, 60);// 创建一个60分钟有效期的
 
 关于容器的使用请参阅：[框架核心 - Ioc容器](chapter1/container.md)
 
-//TODO:未完
+### 延迟加载
+
+先看一个服务提供器示例：
+
+```php
+<?php namespace App\Providers;
+
+use Riak\Connection;
+use Illuminate\Support\ServiceProvider;
+
+class RiakServiceProvider extends ServiceProvider {
+
+    /**
+     * Indicates if loading of the provider is deferred.
+     *
+     * @var bool
+     */
+    protected $defer = true;
+
+    /**
+     * Register the service provider.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        $this->app->singleton('Riak\Contracts\Connection', function($app)
+        {
+            return new Connection($app['config']['riak']);
+        });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['Riak\Contracts\Connection'];
+    }
+
+}
+```
+
+框架在初始化的时候，检查它的 `$defer` 为 `true`，于是尝试读取 `provides()` 方法，得到一个数组：
+
+```php
+['Riak\Contracts\Connection']
+```
+
+于是不会调用 `register` 方法，把 `RiakServiceProvider` 与 `['Riak\Contracts\Connection']` 建立对应关系并存储在框架属性 `$deferredServices` 中。
+
+当你在控制器尝试要使用这个服务的时候，比如在某控制器，您依赖了这个类:
+
+```php
+<?php
+
+namespace App\Controllers;
+
+class FooController extends Controller 
+{
+    protected $raik;
+    
+    public function __construct(\Riak\Contracts\Connection $raik) {
+        $this->raik = $raik;
+    }
+    
+    // ... 
+}
+```
+
+那么框架在调用这个控制器的时候发现它以来了 `Riak\Contracts\Connection`，并对应找出它由 `RiakServiceProvider` 提供，这时才会调用 `RiakServiceProvider` 的 `register` 方法，`register` 向容器注入了 `Riak\Contracts\Connection` 实例， 此时再从容器取出该实例用于控制器 `FooController` 的实例化。
+
