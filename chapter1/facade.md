@@ -1,4 +1,4 @@
-# Facade(外观)模式
+# Facade（外观）模式
 
 GoF《设计模式》中说道：为子系统中的一组接口提供一个一致的界面，Facade模式定义了一个高层接口，这个接口使得这一子系统更加容易使用。
 
@@ -11,3 +11,11 @@ GoF《设计模式》中说道：为子系统中的一组接口提供一个一�
 ![](../images/facade1.jpg)
 
 -- 图片来自[ 设计模式（九）外观模式Facade（结构型）](http://blog.csdn.net/hguisu/article/details/7533759)
+
+上面说一了堆，来一个比较简明一点的解释吧，虽然不是很准确：
+
+在 Laravel 中外观基本上是起到了一个别名或者说代理的作用，让你通过一个入口完成对一个模块提供所有的服务的访问。
+
+比如通过 `Illuminate\Support\Facades\Validator` 类就可以完成所有 [`Illuminate/Validation`](https://github.com/laravel/framework/tree/5.0/src/Illuminate/Validation) 模块提供的功能，而不用你来回的切换记忆该模块的几个类，不用关心它内部是怎么完成这些功能的。
+
+另外 Laravel 还引入了别名功能，主要表现在 [`config/app.php中alias部分`](https://github.com/laravel/laravel/blob/master/config/app.php#L161-L194) ，这样你就可以直接使用 `Validator` 类名代替 `Illuminate\Support\Facades\Validator`，更加简化类名记忆。这块的内部实现主要使用了 PHP提供的 [``]()
