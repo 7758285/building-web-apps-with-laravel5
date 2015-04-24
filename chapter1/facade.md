@@ -18,4 +18,38 @@ GoF《设计模式》中说道：为子系统中的一组接口提供一个一�
 
 比如通过 `Illuminate\Support\Facades\Validator` 类就可以完成所有 [`Illuminate/Validation`](https://github.com/laravel/framework/tree/5.0/src/Illuminate/Validation) 模块提供的功能，而不用你来回的切换记忆该模块的几个类，不用关心它内部是怎么完成这些功能的。
 
-另外 Laravel 还引入了别名功能，主要表现在 [`config/app.php中alias部分`](https://github.com/laravel/laravel/blob/master/config/app.php#L161-L194) ，这样你就可以直接使用 `Validator` 类名代替 `Illuminate\Support\Facades\Validator`，更加简化类名记忆。这块的内部实现主要使用了 PHP提供的 [``]()
+另外 Laravel 还引入了别名功能，主要表现在 [`config/app.php中alias部分`](https://github.com/laravel/laravel/blob/master/config/app.php#L161-L194) ，这样你就可以直接使用 `Validator` 类名代替 `Illuminate\Support\Facades\Validator`，更加简化类名记忆。类别名的内部实现主要使用了 PHP提供的 [`class_alias`](http://php.net/manual/zh/function.class-alias.php) 函数实现。
+
+比如我们在 Laravel 中用到的 `Input`, 它其实是 `Illuminate\Support\Facades\Input` 的别名，然后 `Illuminate\Support\Facades\Input` 是 `Illuminate\Http\Request` 的外观。
+
+代码见：https://github.com/laravel/framework/blob/5.0/src/Illuminate/Support/Facades/Input.php
+
+所以虽然你是静态的使用 `Input::get(xxx)`，但框架内部还是动态调用的 `Illuminate\Http\Request` 实例的一些方法。
+
+## 外观的使用场景
+
+在遇到以下情况使用facade模式：
+    
+1. 当你要为一个复杂子系统提供一个简单接口时。子系统往往因为不断演化而变得越来越复杂。大多数模式使用时都会产生更多更小的类。
+    这使得子系统更具可重用性，也更容易对子系统进行定制，但这也给那些不需要定制子系统的用户带来一些使用上的困难。facade可以提供一个简单的缺省视图，
+    这一视图对大多数用户来说已经足够，而那些需要更多的可定制性的用户可以越过facade层。
+   
+2. 客户程序与抽象类的实现部分之间存在着很大的依赖性。引入 facade将这个子系统与客户以及其他的子系统分离，可以提高子系统的独立性 和可移植性。
+    
+3. 当你需要构建一个层次结构的子系统时，使用 facade模式定义子系统中每层的入口点。如果子系统之间是相互依赖的，你可以让它们仅通过facade进行通讯，从而简化了它们之间的依赖关系。
+
+## 优缺点
+
+Facade模式有下面一些优点：
+
+
+1. 对客户屏蔽子系统组件，减少了客户处理的对象数目并使得子系统使用起来更加容易。通过引入外观模式，客户代码将变得很简单，与之关联的对象也很少。
+2. 实现了子系统与客户之间的松耦合关系，这使得子系统的组件变化不会影响到调用它的客户类，只需要调整外观类即可。
+3. 降低了大型软件系统中的编译依赖性，并简化了系统在不同平台之间的移植过程，因为编译一个子系统一般不需要编译所有其他的子系统。一个子系统的修改对其他子系统没有任何影响，而且子系统内部变化也不会影响到外观对象。
+4. 只是提供了一个访问子系统的统一入口，并不影响用户直接使用子系统类。
+
+Facade模式的缺点:
+
+1. 不能很好地限制客户使用子系统类，如果对客户访问子系统类做太多的限制则减少了可变性和灵活性。
+2. 在不引入抽象外观类的情况下，增加新的子系统可能需要修改外观类或客户端的源代码，违背了“开闭原则”。
+
