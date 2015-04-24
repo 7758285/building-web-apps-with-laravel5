@@ -38,3 +38,5 @@ $cookie->make('logged_user_id', $userId, 60);// 创建一个60分钟有效期的
 ```
 
 就能获取到 `Illuminate\Cookie\CookieJar` 的实例。
+
+关于容器的使用请参阅：
