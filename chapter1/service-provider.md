@@ -2,11 +2,12 @@
 
 Laravel 由很多子模块组成：认证、会话、数据库、表单验证、缓存等等。他们都是按统一的方式注入到框架的 IoC 容器中。
 
-那么他们就必须按一定的规范来完成注册，每个服务提供器必须有一个 `register()` 方法与 一个可选的 `boot()` 方法以及一个表示是否延迟加载的属性 `protected $defer`。`register()` 用于完成一些注册逻辑，比如向 IoC 容器注入一个服务，注册配置文件等。
+那么他们就必须按一定的规范来完成注册，每个服务提供器必须有一个 `register()` 方法与 一个可选的 `boot()` 方法以及一个表示是否延迟加载的属性 `protected $defer`， 另外还有一个配合 `$defer` 用的方法 `provides()`。`register()` 用于完成一些注册逻辑，比如向 IoC 容器注入一个服务，注册配置文件等。
 
-- `register()` 方法
-- `boot()` 方法
-- `$defer` 属性
+- `register()` 方法在框架初始化时调用
+- `boot()` 方法在所有提供器注册完成后调用
+- `$defer` 属性为 `true` 则只在调用该服务提供器提供的服务时才会注册该服务提供器。
+- `provides()` 方法返回一个数组，在 `$defer` 属性为 `true` 时有效，告诉框架当前提供器能提供的服务名称。当你向容器中提供该数组中任意一个名称时，框架才去注册该提供器，以达到延迟加载效果，不调用不注册。
 
 我们来看一个框架内部自己的 Cookie 服务提供器：
 
@@ -16,6 +17,7 @@ Laravel 由很多子模块组成：认证、会话、数据库、表单验证、
 use Illuminate\Support\ServiceProvider;
 
 class CookieServiceProvider extends ServiceProvider {
+	
 	/**
 	 * Register the service provider.
 	 *
