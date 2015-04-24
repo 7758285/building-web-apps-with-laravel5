@@ -100,7 +100,7 @@ class RiakServiceProvider extends ServiceProvider {
 ['Riak\Contracts\Connection']
 ```
 
-`register` 方法不会被调用，而是把 `RiakServiceProvider` 与 `['Riak\Contracts\Connection']` 建立对应关系并存储在框架属性 `$deferredServices` 中。
+`register` 方法不会被调用，而是把 `RiakServiceProvider` 与 `['Riak\Contracts\Connection']` 的对应关系存储在框架属性 `$deferredServices` 中。
 
 当你在控制器尝试要使用这个服务的时候，比如在某控制器，您依赖了这个类:
 
